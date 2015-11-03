@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+body {
+	margin:0;
+	padding:0;
+	background:silver;
+	overflow:hidden;
+	font: 16px "Times New Roman", "Times CY", "Nimbus Roman No9 L", serif;
+}
+div {position:absolute;}
+#body {
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	overflow:hidden;
+	font-size:10px;
+}
+#top {
+	left:0;
+	right:0;
+	top:0;
+	height:50%;
+}
+#bottoml {
+	left:0;
+	bottom:0;
+	width:50%;
+	height:50%;
+}
+#bottomr {
+	right:0;
+	bottom:0;
+	width:50%;
+	height:50%;
+}
+#bottomrt {
+	left:0;
+	top:0;
+	width:100%;
+	bottom:200px;
+}
+#bottomrm {
+	left:0;
+	bottom:80px;
+	width:100%;
+	height:120px;
+}
+#bottomrb {
+	left:0;
+	bottom:0;
+	width:100%;
+	height:80px;
+}
+.chart {
+	left:2px;
+	right:2px;
+	top:12px;
+	bottom:2px;
+}
+
+

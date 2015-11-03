@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [ <!ENTITY common SYSTEM "common.xml"> ]>
+<project name="build" default="deploy" basedir=".">
+
+	<property file="ant.properties"/>
+
+	<target name="deploy" depends="check,
+		build_clock,
+		build_chart,
+		build_calendar,
+		build_meter,
+		build_display,
+		build_counter
+		">
+		<!-- -->
+	  <copy todir="${depl.dir}" encoding="utf-8">
+			<fileset dir="build" includes="*.min.js"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="build" includes="*.src.js"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8" file="WebContent/index.html"/>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/clock" includes="test.*"/>
+			<globmapper from="test.*" to="clock.*"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/chart" includes="test.*"/>
+			<globmapper from="test.*" to="chart.*"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/calendar" includes="test.*"/>
+			<globmapper from="test.*" to="calendar.*"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/meter" includes="test.*"/>
+			<globmapper from="test.*" to="meter.*"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/display" includes="test.*"/>
+			<globmapper from="test.*" to="display.*"/>
+  	</copy>
+		<copy todir="${depl.tst.dir}" encoding="utf-8">
+			<fileset dir="WebContent/counter" includes="test.*"/>
+			<globmapper from="test.*" to="counter.*"/>
+  	</copy>
+		<!-- -->
+	</target>
+
+	<target name="check">
+		<uptodate property="done_clock" targetfile="build/jsclock-${clock.ver}.min.js" >
+	    <srcfiles dir="WebContent/clock" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<uptodate property="done_chart" targetfile="build/jschart-${chart.ver}.min.js" >
+	    <srcfiles dir="WebContent/chart" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<uptodate property="done_calendar" targetfile="build/jscalendar-${calendar.ver}.min.js" >
+	    <srcfiles dir="WebContent/calendar" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<uptodate property="done_meter" targetfile="build/jsmeter-${meter.ver}.min.js" >
+	    <srcfiles dir="WebContent/meter" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<uptodate property="done_display" targetfile="build/jsdisplay-${display.ver}.min.js" >
+	    <srcfiles dir="WebContent/display" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<uptodate property="done_counter" targetfile="build/jscounter-${counter.ver}.min.js" >
+	    <srcfiles dir="WebContent/counter" includes="*.js" excludes="test.*"/>
+	    <srcfiles dir="WebContent/common" includes="*.js"/>
+		</uptodate>
+		<!-- -->
+	</target>
+
+	<target name="build_clock" unless="done_clock">
+		<delete>
+			<fileset dir="build">
+				<include name="jsclock*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jsclock.js"/>
+	    <arg value="WebContent/clock/main.js"/>
+	  </exec>
+		<copy file="build/jsclock.js" tofile="build/jsclock-${clock.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jsclock.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jsclock-${clock.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jsclock.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jsclock.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build_chart" unless="done_chart">
+		<delete>
+			<fileset dir="build">
+				<include name="jschart*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jschart.js"/>
+	    <arg value="WebContent/chart/main.js"/>
+	  </exec>
+		<copy file="build/jschart.js" tofile="build/jschart-${chart.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jschart.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jschart-${chart.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jschart.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jschart.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build_calendar" unless="done_calendar">
+		<delete>
+			<fileset dir="build">
+				<include name="jscalendar*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jscalendar.js"/>
+	    <arg value="WebContent/calendar/main.js"/>
+	  </exec>
+		<copy file="build/jscalendar.js" tofile="build/jscalendar-${calendar.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jscalendar.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jscalendar-${calendar.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jscalendar.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jscalendar.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build_meter" unless="done_meter">
+		<delete>
+			<fileset dir="build">
+				<include name="jsmeter*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jsmeter.js"/>
+	    <arg value="WebContent/meter/main.js"/>
+	  </exec>
+		<copy file="build/jsmeter.js" tofile="build/jsmeter-${meter.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jsmeter.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jsmeter-${meter.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jsmeter.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jsmeter.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build_display" unless="done_display">
+		<delete>
+			<fileset dir="build">
+				<include name="jsdisplay*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jsdisplay.js"/>
+	    <arg value="WebContent/display/main.js"/>
+	  </exec>
+		<copy file="build/jsdisplay.js" tofile="build/jsdisplay-${display.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jsdisplay.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jsdisplay-${display.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jsdisplay.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jsdisplay.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build_counter" unless="done_counter">
+		<delete>
+			<fileset dir="build">
+				<include name="jscounter*.*"/>
+			</fileset>
+		</delete>
+	  <exec executable="pp">
+	    <arg value="-iWebContent/common"/>
+	    <arg value="-obuild/jscounter.js"/>
+	    <arg value="WebContent/counter/main.js"/>
+	  </exec>
+		<copy file="build/jscounter.js" tofile="build/jscounter-${counter.ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="build">
+			<fileset dir="build">
+				<include name="jscounter.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="build/jscounter-${counter.ver}.min.js" encoding="utf-8">
+			<filelist dir="build">
+				<file name="../copyright.js"/>
+				<file name="jscounter.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="build">
+				<include name="jscounter.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- -->
+	<target name="touch">
+		<touch>
+			<fileset dir="WebContent">
+				<include name="**/*.*"/>
+			</fileset>
+		</touch>
+	</target>
+
+	<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+		<classpath>
+			<fileset dir="../../plugins">
+				<include name="*.jar"/>
+			</fileset>
+		</classpath>
+	</taskdef>
+
+</project>

@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+body {
+	margin:0;
+	padding:0;
+	background:#e0e0e0;
+	overflow:hidden;
+	font: 16px "Times New Roman", "Times CY", "Nimbus Roman No9 L", serif;
+}
+div {position:absolute;}
+#body {
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	overflow:hidden;
+	background:#e0e0e0;
+}
+.counter {position:absolute;}
+.left {
+	left:10px;
+	background:silver;
+}
+.right {
+	left:400px;
+	background:black;
+}
+#counter1 {
+	top:50px;
+	width:300px;
+	height:100px;
+}
+#counter2 {
+	top:200px;
+	width:150px;
+	height:50px;
+}
+#counter3 {
+	top:300px;
+	width:90px;
+	height:30px;
+}
+#counter4 {
+	top:50px;
+	width:300px;
+	height:100px;
+}
+#counter5 {
+	top:200px;
+	width:150px;
+	height:50px;
+}
+#counter6 {
+	top:300px;
+	width:90px;
+	height:30px;
+}

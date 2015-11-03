@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+body {
+	margin:0;
+	padding:0;
+	background:silver;
+	overflow:hidden;
+	font: 16px "Times New Roman", "Times CY", "Nimbus Roman No9 L", serif;
+}
+div {
+	position:absolute;
+	background:white;
+}
+#body {
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	overflow:hidden;
+	font-size:12px;
+	background:silver;
+}
+#calendar1 {
+	left:10px;
+	top:10px;
+	width:180px;
+	height:180px;
+	border:4px ridge gray;
+	box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+ 	-webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+}
+
