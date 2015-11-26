@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+  background:#e0e0e0;
+}
+svg {
+  position:absolute;
+  left:0;
+  top:0;
+  width:600px;
+  height:400px;
+}
+#clock {
+  position:absolute;
+  left:342px;
+  top:105px;
+  height:180px;
+  width:180px;
+  -moz-border-radius:90px;
+  -o-border-radius:90px;
+  -webkit-border-radius:90px;
+  border-radius:90px;
+  box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+  -moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+  -webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+}

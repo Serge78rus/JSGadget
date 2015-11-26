@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<meta name="keywords" content="JSGadget, JavaScript, gadget, clock, jsclock" />
+<meta name="description" content="JSClock" />
+<meta name="author" content="Serge L. Ryadkow" />
+<meta name="copyright" content="Serge L. Ryadkow" />
+<link rel="shortcut icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<!--[if lt IE 9]>
+	<script src="/JSGadget/js/html5.js"></script>
+	<script src="/JSGadget/js/excanvas.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+#clock_o_0 {
+	position:absolute;
+	left:20px;
+	top:20px;
+	width:200px;
+	height:200px;
+	border-radius:100px;
+	-moz-border-radius:100px;
+	-o-border-radius:100px;
+	-webkit-border-radius:100px;
+	box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+}
+#clock_i_0 {
+	position:absolute;
+	left:10px;
+	width:180px;
+	top:10px;
+	height:180px;
+	border-radius:90px;
+	-moz-border-radius:90px;
+	-o-border-radius:90px;
+	-webkit-border-radius:90px;
+	box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+	-moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+ 	-webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+}
+</style>
+<script type="text/javascript" src="/JSGadget/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jsclock-1.2.2.min.js"></script>
+<script type="text/javascript">
+	var clock_0;
+	$(function() {
+		$("nav a").click(function() {
+			$("nav div").removeClass("sel");
+			$(this).children("div").addClass("sel").addClass("proc");
+		});
+		$("button.code").click(function() {
+			var b = $(this), n = b.attr("id").replace("code", "");
+			if (b.hasClass("code_on")) {
+				$("#html" + n + " pre").empty();
+				$("#css" + n + " pre").empty();
+				$("#js" + n + " pre").empty();
+				b.text("Show code");
+				b.removeClass("code_on");
+			} else {
+				$.get("jsgadget/jsclock" + n + ".html", function(data) {
+					$("#html" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jsclock" + n + ".css", function(data) {
+					$("#css" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jsclock" + n + ".js", function(data) {
+					$("#js" + n + " pre").text(data);
+				});
+				b.text("Hide code");
+				b.addClass("code_on");
+			}
+		});
+		$("button.demo").click(function() {
+			$("#overlay").addClass("show");
+			$("#demo_f").attr("src", "jsgadget/jsclock" + $(this).attr("id").replace("demo", "") + ".html");
+		});
+		$("#close").click(function() {
+			$("#overlay").removeClass("show");
+			$("#demo_f").attr("src", "")
+		});
+    clock_0 = new JSGadget.Clock("#clock_i_0", {
+			title: "JSClock",
+			font: {size: "bold 16"}
+		});
+	});
+</script>
+<title>JSClock</title>
+</head>
+<body>
+	<header>
+		<h1>JSClock</h1>
+	</header>
+	<div id="body">
+		<article class="demo">
+		<div class="body">
+
+<a name="top">
+<div class="banner0 banner_240"></div>
+<div class="banner banner_240">
+	<div id="clock_o_0">
+		<div id="clock_i_0"></div>
+	</div>
+	<div class="logo"><b><span class="logo_j">J</span><span class="logo_s">S</span>Clock</b></div>
+	<div class="home"><a href="/JSGadget/">Home</a></div>
+</div>
+
+<hr/>
+
+</a><h3>Minimal</h3><hr/>
+<button id="code1" class="code">Show code</button>
+<button id="demo1" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html1" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css1" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js1" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Borders</h3><hr/>
+<button id="code2" class="code">Show code</button>
+<button id="demo2" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html2" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css2" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js2" class="code js"><pre></pre></div>
+<hr/>
+		
+<h3>Round borders</h3><hr/>
+<button id="code3" class="code">Show code</button>
+<button id="demo3" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html3" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css3" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js3" class="code js"><pre></pre></div>
+<hr/>
+		
+<h3>Ellipse</h3><hr/>
+<button id="code4" class="code">Show code</button>
+<button id="demo4" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html4" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css4" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js4" class="code js"><pre></pre></div>
+<hr/>
+		
+<h3>Clock face</h3><hr/>
+<button id="code5" class="code">Show code</button>
+<button id="demo5" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html5" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css5" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js5" class="code js"><pre></pre></div>
+<hr/>
+		
+<h3>Hands</h3><hr/>
+<button id="code6" class="code">Show code</button>
+<button id="demo6" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html6" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css6" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js6" class="code js"><pre></pre></div>
+<hr/>
+		
+<h3>Title</h3><hr/>
+<button id="code7" class="code">Show code</button>
+<button id="demo7" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html7" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css7" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js7" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Local time and UTC</h3><hr/>
+<button id="code8" class="code">Show code</button>
+<button id="demo8" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html8" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css8" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js8" class="code js"><pre></pre></div>
+<hr/>
+
+<h3><span class="red">JS</span>Clock + SVG</h3><hr/>
+<button id="code9" class="code">Show code</button>
+<button id="demo9" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html9" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css9" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js9" class="code js"><pre></pre></div>
+<hr/>
+
+<h3><span class="red">JS</span>Clock + SVG animation</h3><hr/>
+<button id="code10" class="code">Show code</button>
+<button id="demo10" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html10" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css10" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js10" class="code js"><pre></pre></div>
+<hr/>
+
+    </div>
+		</article>
+
+	</div>
+	<footer>
+		<div class="left">
+		  &copy; Serge L. Ryadkow<br/>
+		</div>
+	</footer>
+
+<div id="overlay">
+	<div id="demo">
+		<div id="demo_t">Demonstration</div>
+		<iframe id="demo_f" name="demo_f" frameborder="0"></iframe>
+	</div>
+	<div id="close" title="Close"></div>
+</div>
+
+</body>
+</html>

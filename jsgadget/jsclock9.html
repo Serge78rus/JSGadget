@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="jsclock9.css">
+<!--[if lt IE 9]><script src="/js/excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jsclock-1.2.1.min.js"></script>
+<script type="text/javascript" src="jsclock9.js"></script>
+<title>JSGadget - JSClock9</title>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 133" 
+  preserveAspectRatio="xMidYMid meet">
+  <filter id="svg_f" filterUnits="userSpaceOnUse" x="0" y="0" width="200" height="133">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+    <feOffset in="blur" dx="4" dy="4" result="offsetBlur"/>
+    <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75"
+        specularExponent="20" lighting-color="#bbbbbb" result="specOut">
+      <fePointLight x="-5000" y="-10000" z="20000"/>
+    </feSpecularLighting>
+    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"
+        k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+    <feMerge>
+      <feMergeNode in="offsetBlur"/>
+      <feMergeNode in="litPaint"/>
+    </feMerge>
+  </filter>
+  <g filter="url(#svg_f)" >
+    <path fill="none" stroke="#D90000" stroke-width="10"
+        d="M55,110 a45,45 0 0,1 0,-90 l90,0 a45,45 0 0,1 0,90 z" />
+    <path fill="#0000D9"
+        d="M56,100 a35,35 0 0,1 0,-70 l58,0 a3,3 0 0,1 2,5 
+           a40,40 0 0,0 0,60 a3,3 0 0,1 -2,5
+           z" />
+    <circle cx="144" cy="65" r="38" fill="silver"/>
+  </g>
+  <g fill="white" font-size="12" font-family="Verdana" >
+    <text text-anchor="middle" x="65" y="63"><tspan fill="red">JS</tspan>Clock</text>
+    <text text-anchor="middle" x="65" y="77">+ SVG</text>
+  </g>
+</svg>
+<div id="clock"></div>
+</body>
+</html>

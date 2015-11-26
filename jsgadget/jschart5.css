@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+  background:#e0e0e0;
+}
+div {
+  position:absolute;
+  right:0;
+}
+#legend {
+  left:5px;
+  top:0;
+  height:30px;
+}
+#chart {
+  left:0;
+  top:30px;
+  bottom:0;
+}
+span.blue {color:blue;}
+span.red {color:red;}

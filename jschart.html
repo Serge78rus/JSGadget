@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<meta name="keywords" content="JSGadget, JavaScript, gadget, chart, jschart" />
+<meta name="description" content="JSChart" />
+<meta name="author" content="Serge L. Ryadkow" />
+<meta name="copyright" content="Serge L. Ryadkow" />
+<link rel="shortcut icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<!--[if lt IE 9]>
+	<script src="/JSGadget/js/html5.js"></script>
+	<script src="/JSGadget/js/excanvas.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+#chart_0 {
+	position:absolute;
+	left:20px;
+	top:20px;
+	width:300px;
+	height:200px;
+}
+</style>
+<script type="text/javascript" src="/JSGadget/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jschart-2.2.2.min.js"></script>
+<script type="text/javascript">
+	var chart_0, v_0 = [], i_0 = 60, c_0 = 5;
+	$(function() {
+		$("nav a").click(function() {
+			$("nav div").removeClass("sel");
+			$(this).children("div").addClass("sel").addClass("proc");
+		});
+		$("button.code").click(function() {
+			var b = $(this), n = b.attr("id").replace("code", "");
+			if (b.hasClass("code_on")) {
+				$("#html" + n + " pre").empty();
+				$("#css" + n + " pre").empty();
+				$("#js" + n + " pre").empty();
+				b.text("Show code");
+				b.removeClass("code_on");
+			} else {
+				$.get("jsgadget/jschart" + n + ".html", function(data) {
+					$("#html" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jschart" + n + ".css", function(data) {
+					$("#css" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jschart" + n + ".js", function(data) {
+					$("#js" + n + " pre").text(data);
+				});
+				b.text("Hide code");
+				b.addClass("code_on");
+			}
+		});
+		$("button.demo").click(function() {
+			$("#overlay").addClass("show");
+			$("#demo_f").attr("src", "jsgadget/jschart" + $(this).attr("id").replace("demo", "") + ".html");
+		});
+		$("#close").click(function() {
+			$("#overlay").removeClass("show");
+			$("#demo_f").attr("src", "")
+		});
+		chart_0 = new JSGadget.Chart($("#chart_0"), {
+			font: {size: 10},
+			interactive: false,
+			trends: [
+        new JSGadget.ATrend({data: v_0, xFld: 0, yFld: 1, color: "red"}),
+        new JSGadget.ATrend({data: v_0, xFld: 0, yFld: 2, color: "blue"})
+      ]
+		});
+		chart_0.lAxis.setMinMax(-1.1, 1.1);
+		setInterval(function() {
+			tick();
+		}, 1000);
+		tick();
+	});
+	function tick() {
+		var t2 = new Date(), tz = t2.getTimezoneOffset() * 60;
+		t2 = t2.getTime() / 1000 - tz;
+		var t1 = t2 - i_0, t = (t2 / c_0) % (Math.PI * 2);
+		v_0.push([t2, Math.sin(t), Math.cos(t)]);
+		if (v_0.length > i_0)
+			delete v_0.shift();
+		chart_0.bAxis.setMinMax(t1, t2);
+		chart_0.draw();
+	};
+</script>
+<title>JSChart</title>
+</head>
+<body>
+	<header>
+		<h1>JSChart</h1>
+	</header>
+	<div id="body">
+		<article class="demo">
+		<div class="body">
+
+<a name="top">
+<div class="banner0 banner_240"></div>
+<div class="banner banner_240">
+	<div id="chart_0"></div>
+	<div class="logo"><b><span class="logo_j">J</span><span class="logo_s">S</span>Chart</b></div>
+	<div class="home"><a href="/JSGadget/">Home</a></div>
+</div>
+
+<hr/>
+
+<h3>Minimal</h3><hr/>
+<button id="code1" class="code">Show code</button>
+<button id="demo1" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html1" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css1" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js1" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Multiple trends</h3><hr/>
+<button id="code2" class="code">Show code</button>
+<button id="demo2" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html2" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css2" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js2" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Min and max limits</h3><hr/>
+<button id="code3" class="code">Show code</button>
+<button id="demo3" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html3" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css3" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js3" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Discrete</h3><hr/>
+<button id="code4" class="code">Show code</button>
+<button id="demo4" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html4" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css4" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js4" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Dynamic</h3><hr/>
+<button id="code5" class="code">Show code</button>
+<button id="demo5" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html5" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css5" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js5" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Loading emulation</h3><hr/>
+<button id="code6" class="code">Show code</button>
+<button id="demo6" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html6" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css6" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js6" class="code js"><pre></pre></div>
+<hr/>
+
+    </div>
+		</article>
+
+	</div>
+	<footer>
+		<div class="left">
+		  &copy; Serge L. Ryadkow<br/>
+		</div>
+		<!-- 
+		<div class="right">
+		  Hosted by <a href="http://1gb.ru" target="_blank">1Gb.ru</a>
+		</div>
+		-->
+	</footer>
+
+<div id="overlay">
+	<div id="demo">
+		<div id="demo_t">Demonstration</div>
+		<iframe id="demo_f" name="demo_f" frameborder="0"></iframe>
+	</div>
+	<div id="close" title="Close"></div>
+</div>
+
+</body>
+</html>

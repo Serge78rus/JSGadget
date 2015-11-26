@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+  background:#e0e0e0;
+}
+.counter {
+  position:absolute;
+  left:10px;
+}
+#counter1 {
+  top:10px;
+  width:75px;
+  height:100px;
+}
+#counter2 {
+  top:120px;
+  width:120px;
+  height:80px;
+}
+#counter3 {
+  top:210px;
+  width:145px;
+  height:65px;
+}
+#counter4 {
+  top:284px;
+  width:150px;
+  height:50px;
+}
+#counter5 {
+  top:344px;
+  width:150px;
+  height:40px;
+}
+

@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+  background:#e0e0e0;
+}
+.meter {
+  position:absolute;
+  width:180px;
+  height:180px;
+}
+#meter1 {
+  left:10px;
+  top:10px;
+}
+#meter2 {
+  left:210px;
+  top:10px;
+}
+#meter3 {
+  left:410px;
+  top:10px;
+}
+#meter4 {
+  left:10px;
+  top:210px;
+}
+#meter5 {
+  left:210px;
+  top:210px;
+}
+#meter6 {
+  left:410px;
+  top:210px;
+}
+

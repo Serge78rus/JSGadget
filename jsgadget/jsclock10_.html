@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="jsclock10.css">
+<!--[if lt IE 9]><script src="/js/excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jsclock-1.2.1.min.js"></script>
+<script type="text/javascript" src="jsclock10.js"></script>
+<title>JSGadget - JSClock10</title>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" 
+  preserveAspectRatio="xMidYMid meet" onload="init(evt);">
+
+  <defs>
+    <script type="application/ecmascript"><![CDATA[
+/*
+      function init(evt) { //fix Opera bug: remove shadow
+        if (navigator.userAgent.match(/opera/i)) {
+          document.getElementById("filter_g").setAttribute("filter","none");
+        }
+      }
+  */
+    ]]></script>
+    <radialGradient id="light_c" cx="50%" cy="50%" fx="20%" fy="20%" r="65%">
+      <stop stop-color ="rgb(255,255,255)" offset="0%" />
+      <stop stop-color ="rgb(190,190,190)" offset="40%" />
+      <stop stop-color ="rgb(80,80,80)" offset="100%" />
+    </radialGradient>
+    <linearGradient id="light_r">
+      <stop offset="0" stop-color="black"/>
+      <stop offset=".3" stop-color="white"/>
+      <stop offset="1" stop-color="black"/>
+    </linearGradient>
+    <filter id="shadow" x="-1" y="-1" width="5" height="5">
+      <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2"/>
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2"/>
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
+    </filter>
+  </defs>
+
+  <g id="filter_g" filter="url(#shadow)">
+    <g>
+      <rect x="48" width="4" y="0" height="95" stroke="none" fill="url(#light_r)" />
+      <circle cx="50" cy="70" r="20" fill="url(#light_c)" stroke="none"/>
+      <circle cx="50" cy="70" r="15" fill="blue" stroke="none"/>
+     <animateTransform attributeName="transform" attributeType="XML"
+        type="rotate" from="15,50,0" to="-15,50,0" 
+        calcMode="spline" id="ani1"
+        keySplines=".5 0 .5 1"
+        begin="0s; ani2.end" dur="1s" />
+      <animateTransform attributeName="transform" attributeType="XML"
+        type="rotate" from="-15,50,0" to="15,50,0" 
+        calcMode="spline" id="ani2"
+        keySplines=".5 0 .5 1" 
+        begin="ani1.end" dur="1s" />
+       
+<!--
+     <animateTransform attributeName="transform" attributeType="XML"
+        type="rotate" from="15,50,0" to="-15,50,0" 
+        calcMode="spline" id="ani1"
+        keySplines=".5 0 .5 1; 0 0 1 1" keyTimes="0; .5; 1"
+        begin="0s; ani2.end" dur="1s" />
+      <animateTransform attributeName="transform" attributeType="XML"
+        type="rotate" from="-15,50,0" to="15,50,0" 
+        calcMode="spline" id="ani2"
+        keySplines=".5 0 .5 1; 0 0 1 1" keyTimes="0; .5; 1"
+        begin="ani1.end" dur="1s" />
+    -->    
+        
+    </g>
+  </g>
+  
+</svg>
+<div id="clock_o">
+  <div id="clock_i"></div>
+</div>
+</body>
+</html>
