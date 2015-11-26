@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<meta name="keywords" content="JSGadget, JavaScript, gadget, meter, jsmeter" />
+<meta name="description" content="JSMeter" />
+<meta name="author" content="Serge L. Ryadkow" />
+<meta name="copyright" content="Serge L. Ryadkow" />
+<link rel="shortcut icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="/JSGadget/favicon.ico" type="image/vnd.microsoft.icon" />
+<!--[if lt IE 9]>
+	<script src="/JSGadget/js/html5.js"></script>
+	<script src="/JSGadget/js/excanvas.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+#meter_o_0 {
+	position:absolute;
+	left:20px;
+	top:20px;
+	width:200px;
+	height:140px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-o-border-radius:10px;
+	-webkit-border-radius:10px;
+	box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			4px 4px 6px 2px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			4px 4px 6px 2px rgba(0,0,0,0.7);
+	-webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			4px 4px 6px 2px rgba(0,0,0,0.7);
+	background:gray;
+}
+#meter_i_0 {
+	position:absolute;
+	left:8px;
+	top:8px;
+	width:184px;
+	height:80px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-webkit-border-radius:5px;
+	box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px,
+			2px 2px 2px rgba(255,255,255,0.7);
+	-moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px,
+			2px 2px 2px rgba(255,255,255,0.7);
+ 	-webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px,
+			2px 2px 2px rgba(255,255,255,0.7);
+	background:white;
+}
+</style>
+<script type="text/javascript" src="/JSGadget/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/JSGadget/js/jsmeter-1.1.2.min.js"></script>
+<script type="text/javascript">
+	var meter_0, v_0 = 0, f_0 = false;
+	$(function() {
+		$("nav a").click(function() {
+			$("nav div").removeClass("sel");
+			$(this).children("div").addClass("sel").addClass("proc");
+		});
+		$("button.code").click(function() {
+			var b = $(this), n = b.attr("id").replace("code", "");
+			if (b.hasClass("code_on")) {
+				$("#html" + n + " pre").empty();
+				$("#css" + n + " pre").empty();
+				$("#js" + n + " pre").empty();
+				b.text("Show code");
+				b.removeClass("code_on");
+			} else {
+				$.get("jsgadget/jsmeter" + n + ".html", function(data) {
+					$("#html" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jsmeter" + n + ".css", function(data) {
+					$("#css" + n + " pre").text(data);
+				});
+				$.get("jsgadget/jsmeter" + n + ".js", function(data) {
+					$("#js" + n + " pre").text(data);
+				});
+				b.text("Hide code");
+				b.addClass("code_on");
+			}
+		});
+		$("button.demo").click(function() {
+			$("#overlay").addClass("show");
+			$("#demo_f").attr("src", "jsgadget/jsmeter" + $(this).attr("id").replace("demo", "") + ".html");
+		});
+		$("#close").click(function() {
+			$("#overlay").removeClass("show");
+			$("#demo_f").attr("src", "")
+		});
+    meter_0 = new JSGadget.Meter("#meter_i_0", {
+			title: "JSMeter",
+			font: {size: "bold 16"}
+		});
+		setInterval(function() {
+			if (v_0 <= 0)
+				f_0 = true;
+			else if (v_0 >= 100)
+				f_0 = false;
+			meter_0.setVal(v_0 += f_0 ? 1 : -1);
+		}, 1000);
+	});
+</script>
+<title>JSMeter</title>
+</head>
+<body>
+	<header>
+		<h1>JSMeter</h1>
+	</header>
+	<div id="body">
+		<article class="demo">
+		<div class="body">
+
+<a name="top">
+<div class="banner0 banner_180"></div>
+<div class="banner banner_180">
+	<div id="meter_o_0">
+		<div id="meter_i_0"></div>
+	</div>
+	<div class="logo"><b><span class="logo_j">J</span><span class="logo_s">S</span>Meter</b></div>
+	<div class="home"><a href="/JSGadget/">Home</a></div>
+</div>
+
+<hr/>
+
+<h3>Minimal</h3><hr/>
+<button id="code1" class="code">Show code</button>
+<button id="demo1" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html1" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css1" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js1" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Scales</h3><hr/>
+<button id="code2" class="code">Show code</button>
+<button id="demo2" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html2" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css2" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js2" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Needles</h3><hr/>
+<button id="code3" class="code">Show code</button>
+<button id="demo3" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html3" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css3" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js3" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>CSS borders</h3><hr/>
+<button id="code4" class="code">Show code</button>
+<button id="demo4" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html4" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css4" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js4" class="code js"><pre></pre></div>
+<hr/>
+
+<h3>Dynamic</h3><hr/>
+<button id="code5" class="code">Show code</button>
+<button id="demo5" class="demo">Show result</button>
+<h4>HTML</h4>
+<div id="html5" class="code html"><pre></pre></div>
+<h4>CSS</h4>
+<div id="css5" class="code css"><pre></pre></div>
+<h4>JavaScript</h4>
+<div id="js5" class="code js"><pre></pre></div>
+<hr/>
+
+    </div>
+		</article>
+
+	</div>
+	<footer>
+		<div class="left">
+		  &copy; Serge L. Ryadkow<br/>
+		</div>
+	</footer>
+
+<div id="overlay">
+	<div id="demo">
+		<div id="demo_t">Demonstration</div>
+		<iframe id="demo_f" name="demo_f" frameborder="0"></iframe>
+	</div>
+	<div id="close" title="Close"></div>
+</div>
+
+</body>
+</html>
