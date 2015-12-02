@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [ <!ENTITY common SYSTEM "common.xml"> ]>
+<project name="build_component" default="build_component" basedir=".">
+
+	<property file="${proj.dir}/ant.properties"/>
+
+	<target name="build_component" depends="
+			setprop, 
+			check_lib, 
+			build_lib, 
+			check_test,
+			build_test
+			">
+		<echo>Done: ${name} version ${ver} </echo>
+	</target>
+
+	<target name="setprop">
+		<basename property="name" file="${basedir}" />
+		<propertycopy name="ver" from="${name}.ver" />
+	</target>
+	
+	<target name="check_lib">
+		<uptodate property="done_lib" targetfile="../../build/${name}-${ver}.min.js" >
+	    <srcfiles dir="${basedir}" includes="*.js" />
+	    <srcfiles dir="${inc.dir}" includes="*.js"/>
+		</uptodate>
+	</target>
+	
+	<target name="build_lib" unless="done_lib">
+		<echo>build_lib: ${name}</echo>
+		<delete>
+			<fileset dir="${build.dir}">
+				<include name="${name}*.*"/>
+			</fileset>
+		</delete>
+		<exec executable="pp">
+	  	<arg value="-i${inc.dir}"/>
+	  	<arg value="-o${build.dir}/${name}.js"/>
+	  	<arg value="main.js"/>
+		</exec>
+		<copy file="${build.dir}/${name}.js" tofile="${test.dir}/${name}-${ver}.src.js" />
+		<copy file="${build.dir}/${name}.js" tofile="${build.dir}/${name}-${ver}.src.js" />
+		<yuicompress charset="utf-8" outputfolder="${build.dir}">
+			<fileset dir="${build.dir}">
+				<include name="${name}.js"/>
+			</fileset>
+		</yuicompress>
+		<concat destfile="${build.dir}/${name}-${ver}.min.js" encoding="utf-8">
+			<filelist dir="${proj.dir}">
+				<file name="${inc.dir}/copyright.js"/>
+				<file name="${build.dir}/${name}.js"/>
+			</filelist>
+		</concat>
+		<delete>
+			<fileset dir="${build.dir}">
+				<include name="${name}.js"/>
+				<include name="*.tmp"/>
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="check_test">
+		<condition property="done_test">
+    	<and>
+				<uptodate targetfile="${test.dir}/${name}-test.html" >
+	    		<srcfiles dir="test" includes="*.html" />
+				</uptodate>
+				<uptodate targetfile="${test.dir}/${name}-test.css" >
+	    		<srcfiles dir="test" includes="*.css" />
+				</uptodate>
+				<uptodate targetfile="${test.dir}/${name}-test.js" >
+	    		<srcfiles dir="test" includes="*.js" />
+				</uptodate>
+    	</and>
+  	</condition>
+	</target>
+
+	<target name="build_test" unless="done_test">
+		<echo>build_test: ${name}</echo>
+		<copy todir="${test.dir}" encoding="utf-8">
+			<fileset dir="test" includes="*.*" />
+	    <filterset>
+	      <filter token="VER" value="${ver}"/>
+	      <filter token="JQUERY_VER" value="${jquery.ver}"/>
+	    </filterset>
+  	</copy>
+	</target>
+	
+	<macrodef name="propertycopy">
+  	<attribute name="name"/>
+  	<attribute name="from"/>
+  	<sequential>
+    	<property name="@{name}" value="${@{from}}"/>
+  	</sequential>
+	</macrodef>
+	
+	<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+		<classpath>
+			<fileset dir="${tools.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</classpath>
+	</taskdef>
+	
+
+</project>

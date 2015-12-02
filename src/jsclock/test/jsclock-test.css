@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+body {
+	margin:0;
+	padding:0;
+	background:silver;
+	overflow:hidden;
+	font: 16px "Times New Roman", "Times CY", "Nimbus Roman No9 L", serif;
+}
+div {
+	position:absolute;
+	background:white;
+}
+#body {
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	overflow:hidden;
+	font-size:12px;
+	background:silver;
+}
+#clock1 {
+	left:10px;
+	top:10px;
+	width:180px;
+	height:180px;
+	border:4px ridge gray;
+	box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+ 	-webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, 2px 2px 3px 1px rgba(0,0,0,0.7);
+}
+#clock2 {
+	left:10px;
+	top:220px;
+	width:100px;
+	height:100px;
+	border-radius:50px;
+	box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	background-color:silver;
+}
+#clock2_1 {
+	left:120px;
+	top:220px;
+	width:100px;
+	height:100px;
+	border-radius:50px;
+	box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+	-moz-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+ 	-webkit-box-shadow:inset rgba(0,0,0,0.3) 2px 2px 2px, inset rgba(255,255,255,0.7) -2px -2px 2px;
+	background-color:silver;
+}
+#clock3 {
+	left:10px;
+	top:330px;
+	width:200px;
+	height:150px;
+	border-radius:100px/75px;
+	box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	-webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+			2px 2px 3px 1px rgba(0,0,0,0.7);
+	background-color:silver;
+}
+#clock4 {
+	left:10px;
+	top:490px;
+	width:140px;
+	height:140px;
+	background:black;
+	border:4px ridge gray;
+	box-shadow:2px 2px 3px 1px rgba(0,0,0,0.7);
+	-moz-box-shadow:2px 2px 3px 1px rgba(0,0,0,0.7);
+ 	-webkit-box-shadow:2px 2px 3px 1px rgba(0,0,0,0.7);
+}
+#clock5 {
+	left:10px;
+	top:650px;
+	width:200px;
+	height:200px;
+	border-radius:100px;
+	border:2px solid black;
+}
+
+
